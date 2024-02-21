@@ -1,0 +1,16 @@
+:deep(.avue-crud__header) {
+  margin-top: 11px;
+  padding-top: 11px;
+  border-top: 2px solid #f2f2f2 !important;
+}
+.el-image {
+  width: 60px;
+  border-radius: 50%;
+}
+ /deep/ .el-col-md-24 {
+  width: 83%;
+}
+ /deep/ .avue-form__menu {
+  padding-top: 40px;
+  right: 0;
+}

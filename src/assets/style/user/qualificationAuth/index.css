@@ -1,0 +1,5 @@
+:deep(.avue-crud__header) {
+  margin-top: 11px;
+  padding-top: 11px;
+  border-top: 2px solid #f2f2f2 !important;
+}

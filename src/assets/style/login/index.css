@@ -1,0 +1,76 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+}
+.login-container .left {
+  width: 65%;
+  background: url("/src/assets/images/login-background.png") no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.login-container .left .item-name {
+  width: 160px;
+  height: 25px;
+  font-size: 20px;
+  color: #f6f7f7;
+}
+.login-container .left .item-name img {
+  margin-left: -155px;
+  margin-top: -50px;
+}
+.login-container .right {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-container .right .login-box {
+  width: 380px;
+  height: 455px;
+}
+.login-container .right .login-box .title-box {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+}
+.login-container .right .login-box .title-box .cn-title {
+  width: 96px;
+  height: 33px;
+  font-weight: 900;
+  font-size: 24px;
+  color: #323232;
+}
+.login-container .right .login-box .title-box .en-title {
+  width: 129px;
+  height: 17px;
+  font-weight: 900;
+  font-size: 12px;
+  color: #d9d2ce;
+  padding: 5px 0 5px 0;
+}
+.login-container .right .login-box .input-box {
+  width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.login-container .right .login-box .input-box .el-input {
+  margin-top: 15px;
+  height: 50px;
+}
+.login-container .right .login-box .input-box .el-button {
+  height: 40px;
+  width: 100%;
+  margin-top: 25px;
+  background: #2e80ff;
+}
+.login-container .right .login-box .input-box .verifcode-img {
+  cursor: pointer;
+  border-radius: 4px;
+  position: absolute;
+  top: 13px;
+  right: 0;
+}
+.avue-form__menu {
+  display: none;
+}
