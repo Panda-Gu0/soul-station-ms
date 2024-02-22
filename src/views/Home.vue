@@ -3,14 +3,8 @@
     <el-container style="height: 100%">
       <!-- 侧边栏 -->
       <el-aside width="collapse">
-        <el-menu
-          :default-active="activePath"
-          :collapse="isCollapse"
-          background-color="#00162a"
-          text-color="#687a89"
-          class="el-menu-vertical-demo"
-          style="height: 100%"
-        >
+        <el-menu :default-active="activePath" :collapse="isCollapse" background-color="#00162a" text-color="#687a89"
+          class="el-menu-vertical-demo" style="height: 100%">
           <div class="logo">
             <img src="../assets/images/logo.png" />
             <span v-if="!isCollapse">心灵驿站管理平台</span>
@@ -30,10 +24,7 @@
                 账号管理
               </el-menu-item>
             </router-link>
-            <router-link
-              to="/home/user/qualificationAuth"
-              @click="setActivePath()"
-            >
+            <router-link to="/home/user/qualificationAuth" @click="setActivePath()">
               <el-menu-item index="/home/user/qualificationAuth">
                 <el-icon>
                   <span class="iconfont icon-zigerenzheng1"></span>
@@ -45,20 +36,14 @@
           <el-submenu index="/home/car">
             <template slot="title">
               <el-icon>
-                <span
-                  class="iconfont icon-luntai"
-                  style="font-size: 20px"
-                ></span>
+                <span class="iconfont icon-luntai" style="font-size: 20px"></span>
               </el-icon>
               <span>车辆管理</span>
             </template>
             <router-link to="/home/car/carinfo" @click="setActivePath()">
               <el-menu-item index="/home/car/carinfo">
                 <el-icon>
-                  <span
-                    class="iconfont icon-xplat-9"
-                    style="font-size: 20px"
-                  ></span>
+                  <span class="iconfont icon-xplat-9" style="font-size: 20px"></span>
                 </el-icon>
                 车辆信息管理
               </el-menu-item>
@@ -66,16 +51,13 @@
             <router-link to="/home/car/maint" @click="setActivePath()">
               <el-menu-item index="/home/car/maint">
                 <el-icon>
-                  <span
-                    class="iconfont icon-weixiudan"
-                    style="font-size: 16px"
-                  ></span>
+                  <span class="iconfont icon-weixiudan" style="font-size: 16px"></span>
                 </el-icon>
                 维修信息管理
               </el-menu-item>
             </router-link>
           </el-submenu>
-          <router-link to="/home/post" @click="setActivePath()">
+          <!-- <router-link to="/home/post" @click="setActivePath()">
             <el-menu-item index="/home/post">
               <el-icon v-if="!isCollapse">
                 <span class="iconfont icon-dingdan1"></span>
@@ -94,25 +76,47 @@
               </el-tooltip>
               <span v-if="!isCollapse">树洞管理</span>
             </el-menu-item>
-          </router-link>
+          </router-link> -->
+          <el-submenu index="/home/post">
+            <template slot="title">
+              <el-icon>
+                <span class="iconfont icon-renyuanguanli"></span>
+              </el-icon>
+              <span>树洞管理</span>
+            </template>
+            <router-link to="/home/post" @click="setActivePath()">
+              <el-menu-item index="/home/post">
+                <el-icon>
+                  <span class="iconfont icon-yuangongguanli"></span>
+                </el-icon>
+                文章管理
+              </el-menu-item>
+            </router-link>
+            <router-link to="/home/post/comment" @click="setActivePath()">
+              <el-menu-item index="/home/post/comment">
+                <el-icon>
+                  <span class="iconfont icon-zigerenzheng1"></span>
+                </el-icon>
+                评论管理
+              </el-menu-item>
+            </router-link>
+            <router-link to="/home/post/tag" @click="setActivePath()">
+              <el-menu-item index="/home/post/tag">
+                <el-icon>
+                  <span class="iconfont icon-zigerenzheng1"></span>
+                </el-icon>
+                标签管理
+              </el-menu-item>
+            </router-link>
+          </el-submenu>
           <router-link to="/home/fdmgt" @click="setActivePath()">
             <el-menu-item index="/home/fdmgt">
               <el-icon v-if="!isCollapse">
-                <span
-                  class="iconfont icon-caiwuguanli"
-                  style="font-size: 18px"
-                ></span>
+                <span class="iconfont icon-caiwuguanli" style="font-size: 18px"></span>
               </el-icon>
-              <el-tooltip
-                content="财务统计"
-                placement="right"
-                v-if="isCollapse"
-              >
+              <el-tooltip content="财务统计" placement="right" v-if="isCollapse">
                 <el-icon>
-                  <span
-                    class="iconfont icon-caiwuguanli"
-                    style="font-size: 18px"
-                  ></span>
+                  <span class="iconfont icon-caiwuguanli" style="font-size: 18px"></span>
                 </el-icon>
               </el-tooltip>
               <span v-if="!isCollapse">财务统计</span>
@@ -123,23 +127,18 @@
       <el-container>
         <!-- 头部 -->
         <el-header style="background-color: #ffffff; height: 60px">
-          <span
-            @click="isCollapse = !isCollapse"
-            :class="[
-              'fold',
-              'iconfont',
-              isCollapse ? 'icon-a-shouqi2' : 'icon-zhankai',
-            ]"
-          ></span>
+          <span @click="isCollapse = !isCollapse" :class="[
+            'fold',
+            'iconfont',
+            isCollapse ? 'icon-a-shouqi2' : 'icon-zhankai',
+          ]"></span>
           <el-dropdown>
             <span class="el-dropdown-link">
               <el-avatar :size="50" :src="user.avatar"></el-avatar>
               <span class="nickname">{{ user.nickname }}</span>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="logOut"
-                >退出登录</el-dropdown-item
-              >
+              <el-dropdown-item @click.native="logOut">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-header>
@@ -295,6 +294,7 @@ export default {
 
 .el-header {
   box-shadow: 0 0 6px #ccc;
+
   .fold {
     font-size: 20px;
     margin-left: -5px;
@@ -311,6 +311,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
   .el-avatar {
     margin-right: 10px;
   }
@@ -318,6 +319,7 @@ export default {
 
 .home-container {
   height: 100vh;
+
   .logo {
     width: 100%;
     height: 70px;

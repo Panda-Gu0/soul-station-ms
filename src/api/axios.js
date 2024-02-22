@@ -1,8 +1,11 @@
 // 封装请求配置拦截器
+import router from "../router/index.js";
+import store from "../store"
 import axios from "axios";
 import { showMessage } from "./status";
-// import { ElMessage } from "element-plus";
-import { getToken } from "../utils/auth";
+import { Message, MessageBox } from 'element-ui';
+import { getToken, removeToken } from "../utils/auth";
+
 
 // 设置接口超时时间
 axios.defaults.timeout = 60000;
@@ -31,11 +34,24 @@ axios.interceptors.response.use(
   },
   (error) => {
     const { response } = error;
+    if (response.data.code == "424") {
+      MessageBox.confirm("当前token已过期,请重新登录", "提示", {
+        confirmButtonText: "重新登录",
+        closeOnClickModal: false,
+        showClose: false,
+        showCancelButton: false,
+        type: "warning"
+      }).then(() => {
+        router.push('/login');
+        store.dispatch("logout");
+        removeToken();
+      }).catch(() => { })
+    }
     if (response) {
-      showMessage(response.status);
-      return Promise.reject(response.data);
+      showMessage(response.data.code);
+      return Promise.reject(response.data.describe);
     } else {
-      this.$message.warning("网络连接异常,请稍后再试!");
+      Message.warning("网络连接异常,请稍后再试!");
     }
   }
 );

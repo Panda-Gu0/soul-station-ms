@@ -41,10 +41,16 @@ export function updateUserApi(username, data) {
  * 修改用户头像
  */
 export function uploadAvatarApi(username, data) {
-  console.log("dataaa", data);
   return axios.post(`/user/uploadAvatar?username=${username}`, data, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   });
+}
+
+/**
+ * 删除用户
+ */
+export function deleteUserApi(username) {
+  return axios.delete(`/user/delete?username=${username}`);
 }
