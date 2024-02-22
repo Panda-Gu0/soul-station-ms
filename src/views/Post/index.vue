@@ -39,18 +39,24 @@
         </template>
         <template slot="menu" slot-scope="{ row }">
           <el-button type="text" size="small" icon="el-icon-view">文章详情</el-button>
-          <el-button type="text" size="small" icon="el-icon-edit">修改文章</el-button>
+          <el-button @click="updateConfirm(row)" type="text" size="small" icon="el-icon-edit">修改文章</el-button>
           <el-button type="text" size="small" icon="el-icon-delete" style="color: red;"
             @click="deleteSubmit(row)">删除</el-button>
         </template>
       </avue-crud>
     </el-card>
+    <!-- 修改文章弹窗 -->
+    <update-post-detail ref="updatePostDetail" @refresh="search(form, () => { })"></update-post-detail>
   </div>
 </template>
 <script>
 import { searchOption, tableOption } from "/src/const/post/post.js";
 import { getPostListApi, deletePostApi } from "../../api/post";
+import updatePostDetail from "./components/updatePostDetail.vue";
 export default {
+  components: {
+    updatePostDetail
+  },
   data() {
     return {
       searchOption,
@@ -138,13 +144,12 @@ export default {
         await deletePostApi(postId);
         this.$message.success("用户删除成功");
         this.search(this.form, () => { });
-      } catch(err) {
+      } catch (err) {
         console.log(err);
         return this.$message.error(err.describe);
       }
     },
     deleteSubmit(row) {
-      console.log(row);
       this.$confirm(`是否删除该文章?<span style="color:#f56c6c;">(删除后无法恢复)</span>`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -155,8 +160,11 @@ export default {
           this.deletePost(row.id);
         })
         .catch(() => { });
-  }
-},
+    },
+    updateConfirm(row) {
+      this.$refs.updatePostDetail.init(row);
+    },
+  },
 };
 </script>
 <style lang="less" src="../../assets/style/post/index.less" scoped></style>

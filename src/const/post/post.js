@@ -31,7 +31,7 @@ export const searchOption = {
         label: 'name',
         value: 'id'
       },
-      dicUrl: `http://localhost:3000/tag`,
+      dicUrl: `http://localhost:3000/tag?pageSize=9999999`,
       dicFormatter: (res) => {
         return res.data.data;
       }
