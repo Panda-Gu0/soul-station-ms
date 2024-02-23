@@ -7,6 +7,7 @@ import QualificationAuth from "../views/User/qualificationAuth.vue";
 import Login from "../views/Login/index.vue";
 import Post from "../views/Post/index.vue";
 import Comment from "../views/Post/comment.vue";
+import PostDetail from "../views/Post/postDetail.vue";
 import Tag from "../views/Post/tag.vue";
 
 Vue.use(Router);
@@ -33,6 +34,11 @@ const router = new Router({
           path: "post",
           name: "post",
           component: Post,
+        },
+        {
+          path: "post/detail",
+          name: "postDetail",
+          component: PostDetail,
         },
         {
           path: "post/comment",

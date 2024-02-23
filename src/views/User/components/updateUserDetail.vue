@@ -212,6 +212,7 @@ export default {
 .avatar {
   width: 178px;
   height: 178px;
+  border-radius: 8px;
   display: block;
 }
 </style>

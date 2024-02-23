@@ -34,7 +34,7 @@ axios.interceptors.response.use(
   },
   (error) => {
     const { response } = error;
-    if (response.data.code == "424") {
+    if (response.data.code == "424" || response.data.code == "403") {
       MessageBox.confirm("当前token已过期,请重新登录", "提示", {
         confirmButtonText: "重新登录",
         closeOnClickModal: false,

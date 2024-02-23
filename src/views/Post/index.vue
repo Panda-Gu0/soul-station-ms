@@ -38,7 +38,7 @@
           {{ timeFormat(row.update_time) }}
         </template>
         <template slot="menu" slot-scope="{ row }">
-          <el-button type="text" size="small" icon="el-icon-view">文章详情</el-button>
+          <el-button type="text" size="small" icon="el-icon-view" @click="toDetail(row)">文章详情</el-button>
           <el-button @click="updateConfirm(row)" type="text" size="small" icon="el-icon-edit">修改文章</el-button>
           <el-button type="text" size="small" icon="el-icon-delete" style="color: red;"
             @click="deleteSubmit(row)">删除</el-button>
@@ -46,7 +46,7 @@
       </avue-crud>
     </el-card>
     <!-- 修改文章弹窗 -->
-    <update-post-detail ref="updatePostDetail" @refresh="search(form, () => { })"></update-post-detail>
+    <div><update-post-detail ref="updatePostDetail" @refresh="search(form, () => { })"></update-post-detail></div>
   </div>
 </template>
 <script>
@@ -164,6 +164,10 @@ export default {
     updateConfirm(row) {
       this.$refs.updatePostDetail.init(row);
     },
+    /** 跳转到文章详情页 */
+    toDetail(row) {
+      this.$router.push({ path: 'post/detail', query: { data: row } })
+    }
   },
 };
 </script>

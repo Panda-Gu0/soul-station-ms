@@ -15,3 +15,22 @@ export function getPostListApi(params) {
 export function deletePostApi(postId) {
   return axios.delete(`/posts/delete?postId=${postId}`);
 }
+
+/**
+ * 修改文章
+ */
+export function updatePostApi(data) {
+  return axios.put(`/posts/update`, data);
+}
+
+/**
+ * 修改文章封面
+ */
+export function uploadCoverApi(postId, data) {
+  return axios.post(`/posts/uploadCover?postId=${postId}`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
+
