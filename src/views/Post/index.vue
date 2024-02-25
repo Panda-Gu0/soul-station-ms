@@ -3,15 +3,32 @@
   <div class="user-mgmt-container">
     <!-- 搜索栏 -->
     <el-card style="margin: 8px">
-      <avue-form ref="formRef" :option="searchOption" v-model="form" @submit="search"></avue-form>
+      <avue-form
+        ref="formRef"
+        :option="searchOption"
+        v-model="form"
+        @submit="search"
+      ></avue-form>
       <!-- 表格区 -->
-      <avue-crud ref="crudRef" :option="tableOption" :data="data" :table-loading="loading" :page.sync="page"
-        @size-change="sizeChange" @current-change="currentChange">
+      <avue-crud
+        ref="crudRef"
+        :option="tableOption"
+        :data="data"
+        :table-loading="loading"
+        :page.sync="page"
+        @size-change="sizeChange"
+        @current-change="currentChange"
+      >
         <template slot="coverUrl" slot-scope="{ row }">
-          <el-image :src="row.coverUrl" :preview-src-list="[row.coverUrl]" :preview-teleported="true"
-            style="width: 100px;" v-if="row.coverUrl">
+          <el-image
+            :src="row.coverUrl"
+            :preview-src-list="[row.coverUrl]"
+            :preview-teleported="true"
+            style="width: 100px"
+            v-if="row.coverUrl"
+          >
           </el-image>
-          <div v-else style="color: #909399;">暂无封面</div>
+          <div v-else style="color: #909399">暂无封面</div>
         </template>
         <template slot="title" slot-scope="{ row }">
           {{ `《 ${row.title} 》` }}
@@ -19,17 +36,13 @@
         <template slot="author" slot-scope="{ row }">
           {{ row.author.username }}
         </template>
-        <template slot="content" slot-scope="{ row }">
-          <el-tooltip class="item" effect="dark" :content="row.content" placement="top-start">
-            <avue-text-ellipsis :text="row.content" :height="50">
-              <small slot="more">...</small>
-            </avue-text-ellipsis>
-          </el-tooltip>
-        </template>
         <template slot="tags" slot-scope="{ row }">
-          <div v-if="row.tags && row.tags.length > 0"><el-tag v-for="item in row.tags" :key="item.id">{{ item.name
-          }}</el-tag></div>
-          <div v-else style="color: #909399;">暂无标签</div>
+          <div v-if="row.tags && row.tags.length > 0">
+            <el-tag v-for="item in row.tags" :key="item.id">{{
+              item.name
+            }}</el-tag>
+          </div>
+          <div v-else style="color: #909399">暂无标签</div>
         </template>
         <template slot="create_time" slot-scope="{ row }">
           {{ timeFormat(row.create_time) }}
@@ -38,15 +51,38 @@
           {{ timeFormat(row.update_time) }}
         </template>
         <template slot="menu" slot-scope="{ row }">
-          <el-button type="text" size="small" icon="el-icon-view" @click="toDetail(row)">文章详情</el-button>
-          <el-button @click="updateConfirm(row)" type="text" size="small" icon="el-icon-edit">修改文章</el-button>
-          <el-button type="text" size="small" icon="el-icon-delete" style="color: red;"
-            @click="deleteSubmit(row)">删除</el-button>
+          <el-button
+            type="text"
+            size="small"
+            icon="el-icon-view"
+            @click="toDetail(row)"
+            >详情</el-button
+          >
+          <el-button
+            @click="updateConfirm(row)"
+            type="text"
+            size="small"
+            icon="el-icon-edit"
+            >修改文章</el-button
+          >
+          <el-button
+            type="text"
+            size="small"
+            icon="el-icon-delete"
+            style="color: red"
+            @click="deleteSubmit(row)"
+            >删除</el-button
+          >
         </template>
       </avue-crud>
     </el-card>
     <!-- 修改文章弹窗 -->
-    <div><update-post-detail ref="updatePostDetail" @refresh="search(form, () => { })"></update-post-detail></div>
+    <div>
+      <update-post-detail
+        ref="updatePostDetail"
+        @refresh="search(form, () => {})"
+      ></update-post-detail>
+    </div>
   </div>
 </template>
 <script>
@@ -55,7 +91,7 @@ import { getPostListApi, deletePostApi } from "../../api/post";
 import updatePostDetail from "./components/updatePostDetail.vue";
 export default {
   components: {
-    updatePostDetail
+    updatePostDetail,
   },
   data() {
     return {
@@ -73,7 +109,7 @@ export default {
     };
   },
   created() {
-    this.search(this.form, () => { });
+    this.search(this.form, () => {});
   },
   methods: {
     /** 处理时间范围 */
@@ -122,13 +158,13 @@ export default {
       this.form.page = this.page.currentPage;
       this.form.pageSize = this.page.pageSize;
       console.log(this.form);
-      this.search(this.filteredForm(this.form), () => { });
+      this.search(this.filteredForm(this.form), () => {});
     },
     currentChange(val) {
       this.page.currentPage = val;
       this.form.page = this.page.currentPage;
       this.form.pageSize = this.page.pageSize;
-      this.search(this.filteredForm(this.form), () => { });
+      this.search(this.filteredForm(this.form), () => {});
     },
     timeFormat(timeStr) {
       const date = new Date(timeStr);
@@ -142,32 +178,36 @@ export default {
     async deletePost(postId) {
       try {
         await deletePostApi(postId);
-        this.$message.success("用户删除成功");
-        this.search(this.form, () => { });
+        this.$message.success("文章删除成功");
+        this.search(this.form, () => {});
       } catch (err) {
         console.log(err);
         return this.$message.error(err.describe);
       }
     },
     deleteSubmit(row) {
-      this.$confirm(`是否删除该文章?<span style="color:#f56c6c;">(删除后无法恢复)</span>`, "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        dangerouslyUseHTMLString: true,
-        type: "warning",
-      })
+      this.$confirm(
+        `是否删除该文章?<span style="color:#f56c6c;">(删除后无法恢复)</span>`,
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          dangerouslyUseHTMLString: true,
+          type: "warning",
+        }
+      )
         .then(() => {
           this.deletePost(row.id);
         })
-        .catch(() => { });
+        .catch(() => {});
     },
     updateConfirm(row) {
       this.$refs.updatePostDetail.init(row);
     },
     /** 跳转到文章详情页 */
     toDetail(row) {
-      this.$router.push({ path: 'post/detail', query: { data: row } })
-    }
+      this.$router.push({ path: "post/detail", query: { data: row } });
+    },
   },
 };
 </script>
