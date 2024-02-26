@@ -3,16 +3,29 @@
   <div class="user-mgmt-container">
     <!-- 搜索栏 -->
     <el-card style="margin: 8px">
-      <avue-form ref="formRef" :option="searchOption" v-model="form" @submit="search"></avue-form>
+      <avue-form
+        ref="formRef"
+        :option="searchOption"
+        v-model="form"
+        @submit="search"
+      ></avue-form>
       <!-- 表格区 -->
-      <avue-crud ref="crudRef" :option="tableOption" :data="data" :table-loading="loading" :page.sync="page"
-        @size-change="sizeChange" @current-change="currentChange">
+      <avue-crud
+        ref="crudRef"
+        :option="tableOption"
+        :data="data"
+        :table-loading="loading"
+        :page.sync="page"
+        @size-change="sizeChange"
+        @current-change="currentChange"
+      >
         <template slot="gender" slot-scope="{ row }">
           {{ row.gender == "1" ? "女" : "男" }}
         </template>
         <template slot="roles" slot-scope="{ row }">
           <el-tag size="small" :type="roleNameFormat(row.roles[0].name || '')">
-            {{ row.roles[0].name }}</el-tag>
+            {{ row.roles[0].name }}</el-tag
+          >
         </template>
         <template slot="create_time" slot-scope="{ row }">
           {{ timeFormat(row.create_time) }}
@@ -21,22 +34,50 @@
           {{ timeFormat(row.update_time) }}
         </template>
         <template slot="avatar" slot-scope="{ row }">
-          <el-image :src="row.avatar" :preview-src-list="[row.avatar]" :preview-teleported="true">
+          <el-image
+            :src="row.avatar"
+            :preview-src-list="[row.avatar]"
+            :preview-teleported="true"
+          >
           </el-image>
         </template>
         <template slot="menu" slot-scope="{ row }">
-          <el-button @click="updateConfirm(row)" type="text" icon="el-icon-edit" size="small">编辑</el-button>
-          <el-button @click="resetConfirm(row)" type="text" icon="el-icon-refresh" style="color: #999ca1"
-            size="small">重置密码</el-button>
-          <el-button @click="deleteSubmit(row)" style="color: red" type="text" icon="el-icon-delete"
-            size="small">删除</el-button>
+          <el-button
+            @click="updateConfirm(row)"
+            type="text"
+            icon="el-icon-edit"
+            size="small"
+            >编辑</el-button
+          >
+          <el-button
+            @click="resetConfirm(row)"
+            type="text"
+            icon="el-icon-refresh"
+            style="color: #999ca1"
+            size="small"
+            >重置密码</el-button
+          >
+          <el-button
+            @click="deleteSubmit(row)"
+            style="color: red"
+            type="text"
+            icon="el-icon-delete"
+            size="small"
+            >删除</el-button
+          >
         </template>
       </avue-crud>
     </el-card>
     <!-- 修改密码弹窗 -->
-    <reset-pwd-modal ref="resetPwdModal" @refresh="search(form, () => { })"></reset-pwd-modal>
+    <reset-pwd-modal
+      ref="resetPwdModal"
+      @refresh="search(form, () => {})"
+    ></reset-pwd-modal>
     <!-- 修改用户信息弹窗 -->
-    <update-user-detail ref="updateUserDetail" @refresh="search(form, () => { })"></update-user-detail>
+    <update-user-detail
+      ref="updateUserDetail"
+      @refresh="search(form, () => {})"
+    ></update-user-detail>
   </div>
 </template>
 <script>
@@ -65,7 +106,7 @@ export default {
     };
   },
   created() {
-    this.search(this.form, () => { });
+    this.search(this.form, () => {});
   },
   methods: {
     /** 处理时间范围 */
@@ -114,13 +155,13 @@ export default {
       this.form.page = this.page.currentPage;
       this.form.pageSize = this.page.pageSize;
       console.log(this.form);
-      this.search(this.filteredForm(this.form), () => { });
+      this.search(this.filteredForm(this.form), () => {});
     },
     currentChange(val) {
       this.page.currentPage = val;
       this.form.page = this.page.currentPage;
       this.form.pageSize = this.page.pageSize;
-      this.search(this.filteredForm(this.form), () => { });
+      this.search(this.filteredForm(this.form), () => {});
     },
     /** 打开修改密码弹窗 */
     resetConfirm(row) {
@@ -134,7 +175,10 @@ export default {
       const year = date.getFullYear();
       const month = (date.getMonth() + 1).toString().padStart(2, "0");
       const day = date.getDate().toString().padStart(2, "0");
-      const formattedTime = `${year}-${month}-${day} 00:00:00`;
+      const hours = date.getHours().toString().padStart(2, "0");
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+      const seconds = date.getSeconds().toString().padStart(2, "0");
+      const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
       return formattedTime;
     },
     roleNameFormat(roleName) {
@@ -156,8 +200,8 @@ export default {
       try {
         await deleteUserApi(username);
         this.$message.success("用户删除成功");
-        this.search(this.form, () => { });
-      } catch(err) {
+        this.search(this.form, () => {});
+      } catch (err) {
         console.log(err);
         return this.$message.error(err.describe);
       }
@@ -172,8 +216,8 @@ export default {
         .then(() => {
           this.deleteUser(row.username);
         })
-        .catch(() => { });
-    }
+        .catch(() => {});
+    },
   },
 };
 </script>

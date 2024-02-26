@@ -128,7 +128,10 @@ export default {
       const year = date.getFullYear();
       const month = (date.getMonth() + 1).toString().padStart(2, "0");
       const day = date.getDate().toString().padStart(2, "0");
-      const formattedTime = `${year}-${month}-${day} 00:00:00`;
+      const hours = date.getHours().toString().padStart(2, "0");
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+      const seconds = date.getSeconds().toString().padStart(2, "0");
+      const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
       return formattedTime;
     },
     /** 删除标签 */
@@ -168,8 +171,8 @@ export default {
 };
 </script>
 <style lang="less" src="../../assets/style/post/index.less" scoped></style>
-<style>
-.el-tooltip__popper.is-dark {
-  width: 400px;
+<style lang="less" scoped>
+/deep/ .avue-form__menu {
+  margin-top: -0;
 }
 </style>

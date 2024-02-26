@@ -6,6 +6,7 @@ export const searchOption = {
   menuPosition: "right",
   menuSpan: 25,
   gutter: 10,
+  submitIcon: "el-icon-search",
   submitText: "搜索",
   column: [
     {

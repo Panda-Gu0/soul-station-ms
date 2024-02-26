@@ -1,18 +1,19 @@
 /**
- * 树洞文章 option 配置项
+ * 树洞标签 option 配置项
  */
 export const searchOption = {
-  labelPosition: "top",
+  labelPosition: "left",
   menuPosition: "left",
   menuSpan: 4,
   gutter: 10,
+  submitIcon: "el-icon-search",
   submitText: "搜索",
   column: [
     {
       label: "标签名",
-      labelWidth: 90,
+      labelWidth: 60,
       prop: "name",
-      span: 3,
+      span: 4,
     },
   ],
 };
