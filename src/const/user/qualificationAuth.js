@@ -1,32 +1,62 @@
 /**
- * 心理咨询师认证 option 配置项
+ * 心理咨询认证管理 option 配置项
  */
 export const searchOption = {
   labelPosition: "top",
-  menuPosition: "right",
-  menuSpan: 25,
+  menuPosition: "left",
+  menuSpan: 4,
   gutter: 10,
+  searchMenuSpan: 2,
   submitIcon: "el-icon-search",
   submitText: "搜索",
   column: [
     {
-      label: "用户名",
+      label: "申请用户名",
       labelWidth: 90,
-      prop: "age",
+      prop: "username",
       span: 4,
     },
     {
-      label: "用户名称",
+      label: "审核状态",
       labelWidth: 90,
-      prop: "nickname",
+      prop: "status",
+      type: "select",
+      noDataText: "暂无数据",
       span: 4,
+      dicData: [
+        {
+          label: "未通过",
+          value: "0",
+        },
+        {
+          label: "审核中",
+          value: "1",
+        },
+        {
+          label: "已通过",
+          value: "2",
+        },
+      ],
     },
     {
       label: "申请时间",
-      labelWidth: 90,
-      prop: "applyTime",
-      type: "datetime",
       span: 4,
+      type: "datetimerange",
+      prop: "applyRange",
+      format: "yyyy-MM-dd HH:mm:ss",
+      valueFormat: "yyyy-MM-dd HH:mm:ss",
+      startPlaceholder: "开始时间",
+      endPlaceholder: "结束时间",
+    },
+    {
+      label: "修改时间",
+      span: 4,
+      type: "datetimerange",
+      prop: "updateRange",
+      format: "yyyy-MM-dd HH:mm:ss",
+      valueFormat: "yyyy-MM-dd HH:mm:ss",
+      startPlaceholder: "开始时间",
+      endPlaceholder: "结束时间",
     },
   ],
 };
@@ -36,29 +66,36 @@ export const searchOption = {
  */
 export const tableOption = {
   index: true,
+  indexLabel: "序号",
+  indexWidth: 80,
+  menuWidth: 220,
   align: "center",
+  editBtn: false,
+  delBtn: false,
   addBtn: false,
+  border: true,
   column: [
     {
       label: "用户名",
       prop: "username",
     },
     {
-      label: "用户昵称",
-      prop: "nickname",
+      label: "申请资料",
+      prop: "evidenceUrl",
     },
     {
-      label: "邮箱",
-      prop: "email",
-      width: 180,
-    },
-    {
-      label: "审核资料",
-      prop: "auditData",
+      label: "审核状态",
+      prop: "status",
     },
     {
       label: "申请时间",
-      prop: "applyTime",
+      prop: "apply_time",
+      width: 150,
+    },
+    {
+      label: "更新时间",
+      prop: "update_time",
+      width: 150,
     },
   ],
 };
